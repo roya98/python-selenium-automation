@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
 from behave import given, when, then
 from selenium.webdriver.support import expected_conditions as EC
+from time import sleep
+
 
 ADD_TO_CART_BTN = (By.ID, 'add-to-cart-button')
 PRODUCT_NAME =(By.ID, 'productTitle')
@@ -33,7 +35,24 @@ def click_sign_in(context):
     e.click()
 
 
+@when('Wait for {sec} sec')
+def wait_sec(context, sec):
+    sleep(int(sec))
+
+
+
+@then('Verify Sign In disappears')
+def sign_in_disappears(context):
+    context.driver.wait.until(EC.invisibility_of_element_located((SIGN_IN)), message ='sign is still visible')
+
+@then('Verify Sign In is clickable')
+def verify_sign_in_clickable(context):
+    context.driver.wait.until(EC.element_to_be_clickable(SIGN_IN), message='sign in not clickable')
+
+
 
 @then('Verify hamburger menu is present')
 def verify_ham_menu_present(context):
     context.driver.find_element(*HAM_MENU)
+
+
