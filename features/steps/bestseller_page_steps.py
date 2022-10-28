@@ -1,18 +1,11 @@
-from selenium.webdriver.common.by import By
-from behave import given, when, then
+from behave import given, then
 
 
-LINKS = (By.CSS_SELECTOR, "._p13n-zg-nav-tab-all_style_zg-tabs__EYPLq a")
-
-@given('Open Amazon Best Seller')
-def open_amazon_bestseller(context):
-    context.driver.get('https://www.amazon.com/gp/bestsellers/?ref_=nav_cs_bestsellers')
+@given('Open Amazon Bestsellers')
+def open_amazon_bestsellers(context):
+    context.app.bestsellers_page.open_bestsellers()
 
 
-
-@then('Verify five links')
-def verify_links(context):
-  links = context.driver.find_elements(*LINKS)
-  assert len(links) == 5, f'expected 5 but got {len(links)}'
-
-
+@then('User can click through top links and verify correct page opens')
+def click_thru_top(context):
+    context.app.bestsellers_page.click_thru_top_links()

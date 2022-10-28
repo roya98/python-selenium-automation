@@ -4,51 +4,32 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 
 
-ADD_TO_CART_BTN = (By.ID, 'add-to-cart-button')
-PRODUCT_NAME =(By.ID, 'productTitle')
-
 HAM_MENU = (By.ID, 'nav-hamburger-menu')
 FOOTER_LINKS = (By.CSS_SELECTOR, '.navFooterDescItem a')
 SIGN_IN = (By.CSS_SELECTOR, "#nav-signin-tooltip .nav-action-button")
-SEARCH_INPUT = (By.ID, 'twotabsearchtextbox')
 
 
-@given('Open Amazon Page')
+@given('Open Amazon page')
 def open_amazon(context):
-    context.driver.get('https://www.amazon.com/')
-
-
-@when('Find returns & orders')
-def click_orders(context):
-    context.driver.find_element(By.ID, 'nav-orders').click()
+    context.app.main_page.open_main()
 
 
 @when('Search for {product}')
 def search_product(context, product):
-    context.driver.find_element(*SEARCH_INPUT).send_keys(product)
-    context.driver.find_element(By.ID, 'nav-search-submit-button').click()
+    context.app.main_page.search_product(product)
+
+
+@when('Find returns & orders')
+def click_orders(context):
+   # context.driver.find_element(By.ID, 'nav-orders').click()
+    context.app.signin_page.click_orders_link()
+
 
 
 @when('Click on button from SignIn popup')
 def click_sign_in(context):
-    e = context.driver.wait.until(EC.element_to_be_clickable(SIGN_IN), message='sign in not clickable')
+    e = context.driver.wait.until(EC.element_to_be_clickable(SIGN_IN), message='Sign in not clickable')
     e.click()
-
-
-@when('Wait for {sec} sec')
-def wait_sec(context, sec):
-    sleep(int(sec))
-
-
-
-@then('Verify Sign In disappears')
-def sign_in_disappears(context):
-    context.driver.wait.until(EC.invisibility_of_element_located((SIGN_IN)), message ='sign is still visible')
-
-@then('Verify Sign In is clickable')
-def verify_sign_in_clickable(context):
-    context.driver.wait.until(EC.element_to_be_clickable(SIGN_IN), message='sign in not clickable')
-
 
 
 @then('Verify hamburger menu is present')
@@ -56,3 +37,11 @@ def verify_ham_menu_present(context):
     context.driver.find_element(*HAM_MENU)
 
 
+@then('Verify that footer has {expected_link_count} links')
+def verify_link_count(context, expected_link_count):
+    expected_link_count = int(expected_link_count)
+
+    links = context.driver.find_elements(*FOOTER_LINKS)
+
+    assert len(links) == expected_link_count, \
+        f'Expected {expected_link_count} links, but got {len(links)}'

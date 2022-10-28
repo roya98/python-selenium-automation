@@ -3,5 +3,5 @@ Feature: Amazon BestSeller
   # Enter feature description here
 
   Scenario: There are five links in amazon bestseller page
-    Given Open Amazon Best Seller
-    Then Verify five links
+    Given Open Amazon Bestsellers
+    Then User can click through top links and verify correct page opens

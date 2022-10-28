@@ -4,8 +4,21 @@ Feature: # Enter feature name here
 
   Scenario: User can add a product to the cart
     Given Open Amazon Page
-    When Search for Dress
-    And Click on the first product
-    And Click on Add to cart button
-    And Open cart page
-    Then Verify cart has 1 item(s)
+     When Search for Dress
+     And Click on the first product
+     And Click on Add to cart button
+     And Open cart page
+     Then Verify cart has 1 item(s)
+
+
+
+
+  Scenario: User can search for coffee
+    Given Open amazon page
+    When Search for coffee
+    Then Search results for "coffee" are shown
+
+  Scenario: User can search for mug
+    Given Open amazon page
+    When Search for mug
+    Then Search results for "mug" are shown

@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 
-ADD_TO_CART_BTN = (By.ID, 'add-to-cart-button')
+
 PRODUCT_NAME =(By.ID, 'productTitle')
 COLOR_OPTIONS = (By.CSS_SELECTOR, "#variation_color_name li")
 CURRENT_COLOR = (By.CSS_SELECTOR, "#variation_color_name .selection")
@@ -17,8 +17,7 @@ def open_amazon_product(context, product_id):
 
 @when('Click on Add to cart button')
 def click_add_to_cart(context):
-    e = context.driver.find_element(*ADD_TO_CART_BTN)
-    context.driver.wait.until(EC.element_to_be_clickable(ADD_TO_CART_BTN)).click()
+    context.app.cart_page.add_to_cart()
 
 
 @when('Store product name')
