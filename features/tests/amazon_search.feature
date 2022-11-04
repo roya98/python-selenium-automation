@@ -22,3 +22,15 @@ Feature: # Enter feature name here
     Given Open amazon page
     When Search for mug
     Then Search results for "mug" are shown
+
+
+  Scenario Outline: User can select and search in a department
+    Given Open amazon page
+    When Select department by value <value>
+    And Search for Alexa
+    Then Verify <department> department is selected
+    Examples:
+      | value               |department |
+      | amazon-devices      |amazon-devices |
+      | alexa-skills       | digital-skills   |
+

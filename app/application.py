@@ -3,6 +3,7 @@ from pages.main_page import MainPage
 from pages.search_results_page import SearchResultsPage
 from pages.signin_page import Signin
 from pages.cart_page import Cart
+from pages.amazon_fashion import Fashion
 
 
 class Application:
@@ -14,3 +15,4 @@ class Application:
         self.search_results_page = SearchResultsPage(self.driver)
         self.signin_page = Signin(self.driver)
         self.cart_page = Cart(self.driver)
+        self.amazon_fashion = Fashion(self.driver)

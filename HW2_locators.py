@@ -34,4 +34,7 @@ driver.find_element(BY.XPATH, "//a[@class='a-link-normal' and contains(text(), '
 #Privacy linl
 driver.find_element(BY.XPATH, "//a[@class='a-link-normal' and contains(text(), 'Privacy')]" )
 
-
+# NEW_ARRIVALS = (By.CSS_SELECTOR, '.nav-hasArrow[aria-label="New Arrivals"]')
+# DEALS = (By.ID, 'nav-flyout-abAcquisition')
+# DEALS = (By.XPATH, '//a[contains(@href,"/s?i=fashion-womens&bbn=19225926011&r")]')
+# DEALS = (By.XPATH, '//ul[@class="mm-category-list"]/li[h3/text()="Women"]')

@@ -31,6 +31,17 @@ def click_sign_in(context):
     e = context.driver.wait.until(EC.element_to_be_clickable(SIGN_IN), message='Sign in not clickable')
     e.click()
 
+@when('Select department by value {selecction_value}')
+def select_department(context, selecction_value):
+    context.app.main_page.select_department(selecction_value)
+
+
+
+@then('Verify {department_value} department is selected')
+def verify_department_selected(context, department_value):
+    context.app.search_results_page.verify_department(department_value)
+
+
 
 @then('Verify hamburger menu is present')
 def verify_ham_menu_present(context):
